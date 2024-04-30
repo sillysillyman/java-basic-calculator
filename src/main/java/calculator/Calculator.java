@@ -15,6 +15,12 @@ public class Calculator {
         this.results = results;
     }
 
+    public void removeResult() {
+        if (results.poll() == null) {
+            System.out.println("Results queue is empty.");
+        }
+    }
+
     public double calculate(double x, double y, char op) {
         double result = switch (op) {
             case '+' -> x + y;

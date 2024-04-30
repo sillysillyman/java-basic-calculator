@@ -44,14 +44,7 @@ public class App {
                 "Do you want to remove the oldest result? (Press ENTER to continue, type 'remove' to delete it)");
             String removeMsg = sc.nextLine();
             if (removeMsg.strip().equalsIgnoreCase("remove")) {
-                Queue<Double> removedResults = calc.getResults();
-                var removedElement = removedResults.poll();
-
-                if (removedElement == null) {
-                    System.out.println("Results queue is empty.");
-                } else {
-                    calc.setResults(removedResults);
-                }
+                calc.removeResult();
             }
             System.out.println(
                 "Do you want to inquiry the saved results? (Press ENTER to continue, type 'inquiry' to check them)");
