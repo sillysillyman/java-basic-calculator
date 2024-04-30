@@ -21,6 +21,19 @@ public class Calculator {
         }
     }
 
+    public void inquiryResults() {
+        if (results.isEmpty()) {
+            System.out.println("Results queue is empty.");
+        } else {
+            System.out.print("results: [ ");
+            results.forEach(
+                element -> {
+                    System.out.printf("%.2f ", element);
+                });
+            System.out.println("]");
+        }
+    }
+
     public double calculate(double x, double y, char op) {
         double result = switch (op) {
             case '+' -> x + y;

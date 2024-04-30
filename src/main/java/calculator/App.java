@@ -50,16 +50,7 @@ public class App {
                 "Do you want to inquiry the saved results? (Press ENTER to continue, type 'inquiry' to check them)");
             String inquiryMsg = sc.nextLine();
             if (inquiryMsg.strip().equalsIgnoreCase("inquiry")) {
-                if (calc.getResults().isEmpty()) {
-                    System.out.println("Results queue is empty.");
-                } else {
-                    System.out.print("results: [ ");
-                    calc.getResults().forEach(
-                        element -> {
-                            System.out.printf("%.2f ", element);
-                        });
-                    System.out.println("]");
-                }
+                calc.inquiryResults();
             }
             System.out.println(
                 "Do you want to calculate more? (Press ENTER to continue, type 'exit' to end)");
