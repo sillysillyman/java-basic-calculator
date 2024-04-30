@@ -51,7 +51,7 @@ public class App {
                 case '*' -> x * y;
                 case '/' -> {
                     if (y != 0) {
-                        yield (double) x / y;
+                        yield x / y;
                     } else {
                         System.out.println("Division by zero is undefined.");
                         yield Double.NaN;
