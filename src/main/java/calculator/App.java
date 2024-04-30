@@ -1,14 +1,12 @@
 package calculator;
 
 import java.util.Scanner;
-import java.util.Queue;
-import java.util.LinkedList;
 
 public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Queue<Double> queue = new LinkedList<>();
+        Calculator calc = new Calculator();
 
         while (true) {
             double x = 0;
@@ -45,29 +43,13 @@ public class App {
                 }
             }
 
-            double result = switch (op) {
-                case '+' -> x + y;
-                case '-' -> x - y;
-                case '*' -> x * y;
-                case '/' -> {
-                    if (y != 0) {
-                        yield x / y;
-                    } else {
-                        System.out.println("Division by zero is undefined.");
-                        yield Double.NaN;
-                    }
-                }
-                default -> Double.NaN;
-            };
+            double result = calc.calculate(x, y, op);
             System.out.println("result: " + result);
-            if (!queue.offer(result)) {
-                System.out.println("Enqueue operation failed.");
-            }
             System.out.println(
                 "Do you want to remove the oldest result? (Press ENTER to continue, type 'remove' to delete it)");
             String removeMsg = sc.nextLine();
             if (removeMsg.strip().equalsIgnoreCase("remove")) {
-                if (queue.poll() == null) {
+                if (calc.queue.poll() == null) {
                     System.out.println("Queue is empty.");
                 }
             }
@@ -75,11 +57,11 @@ public class App {
                 "Do you want to inquiry the saved results? (Press ENTER to continue, type 'inquiry' to check them)");
             String inquiryMsg = sc.nextLine();
             if (inquiryMsg.strip().equalsIgnoreCase("inquiry")) {
-                if (queue.isEmpty()) {
+                if (calc.queue.isEmpty()) {
                     System.out.println("Queue is empty.");
                 } else {
                     System.out.print("Queue: [ ");
-                    queue.forEach(
+                    calc.queue.forEach(
                         element -> {
                             System.out.printf("%.2f ", element);
                         });
