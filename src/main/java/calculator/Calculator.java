@@ -5,7 +5,15 @@ import java.util.LinkedList;
 
 public class Calculator {
 
-    Queue<Double> queue = new LinkedList<Double>();
+    private Queue<Double> results = new LinkedList<Double>();
+
+    public Queue<Double> getResults() {
+        return new LinkedList<>(results);
+    }
+
+    public void setResults(Queue<Double> results) {
+        this.results = results;
+    }
 
     public double calculate(double x, double y, char op) {
         double result = switch (op) {
@@ -23,7 +31,7 @@ public class Calculator {
                 throw new IllegalArgumentException("Unsupported operation: " + op);
             }
         };
-        if (!queue.offer(result)) {
+        if (!results.offer(result)) {
             System.out.println("Enqueue operation failed.");
         }
         return result;
