@@ -7,12 +7,40 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.print("Enter the first number: ");
-            int x = Integer.parseInt(sc.nextLine());
-            System.out.print("Enter the second number: ");
-            int y = Integer.parseInt(sc.nextLine());
-            System.out.print("Enter the operator: ");
-            char op = sc.nextLine().charAt(0);
+            double x = 0;
+            while (true) {
+                try {
+                    System.out.print("Enter the first number: ");
+                    x = Double.parseDouble(sc.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid integer.");
+                }
+            }
+
+            double y = 0;
+            while (true) {
+                try {
+                    System.out.print("Enter the second number: ");
+                    y = Double.parseDouble(sc.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid integer.");
+                }
+            }
+
+            char op = ' ';
+            while (true) {
+                System.out.print("Enter the operator (+, -, *, /): ");
+                op = sc.nextLine().charAt(0);
+
+                if (op == '+' || op == '-' || op == '*' || op == '/') {
+                    break;
+                } else {
+                    System.out.println("Invalid operator. Please enter a valid operator.");
+                }
+            }
+
             double result = switch (op) {
                 case '+' -> x + y;
                 case '-' -> x - y;
