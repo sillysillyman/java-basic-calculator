@@ -1,11 +1,15 @@
 package calculator;
 
 import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Queue<Double> queue = new LinkedList<>();
+
         while (true) {
             double x = 0;
             while (true) {
@@ -59,11 +63,21 @@ public class App {
                 }
             };
             System.out.println("result: " + result);
+            if (!queue.offer(result)) {
+                System.out.println("Enqueue operation failed");
+            }
+            System.out.println(
+                "Do you want to remove the oldest result? (type 'remove' to delete it)");
+            String removeMsg = sc.nextLine();
+            if (removeMsg.strip().equalsIgnoreCase("remove")) {
+                if (queue.poll() == null) {
+                    System.out.println("Queue is empty");
+                }
+            }
             System.out.println(
                 "Do you want to calculate more? (Press ENTER to continue, type 'exit' to end)");
-
-            String input = sc.nextLine();
-            if (input.strip().equalsIgnoreCase("exit")) {
+            String exitMsg = sc.nextLine();
+            if (exitMsg.strip().equalsIgnoreCase("exit")) {
                 break;
             }
         }
