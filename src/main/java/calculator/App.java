@@ -31,17 +31,8 @@ public class App {
                 }
             }
 
-            char op = ' ';
-            while (true) {
-                System.out.print("Enter the operator (+, -, *, /): ");
-                op = sc.nextLine().charAt(0);
-
-                if (op == '+' || op == '-' || op == '*' || op == '/') {
-                    break;
-                } else {
-                    System.out.println("Invalid operator. Please enter a valid operator.");
-                }
-            }
+            System.out.print("Enter the operator (+, -, *, /): ");
+            char op = sc.nextLine().charAt(0);
 
             double result = calc.calculate(x, y, op);
             System.out.println("result: " + result);

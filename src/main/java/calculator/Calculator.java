@@ -19,7 +19,9 @@ public class Calculator {
                     throw new ArithmeticException("Division by zero is undefined.");
                 }
             }
-            default -> Double.NaN;
+            default -> {
+                throw new IllegalArgumentException("Unsupported operation: " + op);
+            }
         };
         if (!queue.offer(result)) {
             System.out.println("Enqueue operation failed.");
