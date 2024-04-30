@@ -57,21 +57,33 @@ public class App {
                         yield Double.NaN;
                     }
                 }
-                default -> {
-                    System.out.println(op + " is not an operator.");
-                    yield Double.NaN;
-                }
+                default -> Double.NaN;
             };
             System.out.println("result: " + result);
             if (!queue.offer(result)) {
-                System.out.println("Enqueue operation failed");
+                System.out.println("Enqueue operation failed.");
             }
             System.out.println(
-                "Do you want to remove the oldest result? (type 'remove' to delete it)");
+                "Do you want to remove the oldest result? (Press ENTER to continue, type 'remove' to delete it)");
             String removeMsg = sc.nextLine();
             if (removeMsg.strip().equalsIgnoreCase("remove")) {
                 if (queue.poll() == null) {
-                    System.out.println("Queue is empty");
+                    System.out.println("Queue is empty.");
+                }
+            }
+            System.out.println(
+                "Do you want to inquiry the saved results? (Press ENTER to continue, type 'inquiry' to check them)");
+            String inquiryMsg = sc.nextLine();
+            if (inquiryMsg.strip().equalsIgnoreCase("inquiry")) {
+                if (queue.isEmpty()) {
+                    System.out.println("Queue is empty.");
+                } else {
+                    System.out.print("Queue: [ ");
+                    queue.forEach(
+                        element -> {
+                            System.out.printf("%.2f ", element);
+                        });
+                    System.out.println("]");
                 }
             }
             System.out.println(
