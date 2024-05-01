@@ -5,7 +5,11 @@ import java.util.LinkedList;
 
 public class Calculator {
 
-    private Queue<Double> results = new LinkedList<Double>();
+    private Queue<Double> results;
+
+    public Calculator() {
+        this.results = new LinkedList<Double>();
+    }
 
     public Queue<Double> getResults() {
         return new LinkedList<>(results);

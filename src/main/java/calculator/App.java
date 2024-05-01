@@ -9,9 +9,7 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Calculator calc = new Calculator();
-        Queue<Double> emptyResults = new LinkedList<Double>();
 
-        calc.setResults(emptyResults);
         while (true) {
             double x = 0;
             while (true) {
