@@ -37,27 +37,63 @@ public class Calculator {
     }
 }
 
+class AddOperator {
+
+    public double operate(double x, double y) {
+        return x + y;
+    }
+}
+
+class SubtractOperator {
+
+    public double operate(double x, double y) {
+        return x - y;
+    }
+}
+
+class MultiplyOperator {
+
+    public double operate(double x, double y) {
+        return x * y;
+    }
+}
+
+class DivideOperator {
+
+    public double operate(double x, double y) {
+        if (y == 0) {
+            throw new ArithmeticException("Division by zero is undefined.");
+        }
+        return x / y;
+    }
+}
+
+
 class ArithmeticCalculator extends Calculator {
 
+    private AddOperator addOperator;
+    private SubtractOperator subtractOperator;
+    private MultiplyOperator multiplyOperator;
+    private DivideOperator divideOperator;
+
     public ArithmeticCalculator() {
+        this.addOperator = new AddOperator();
+        this.subtractOperator = new SubtractOperator();
+        this.multiplyOperator = new MultiplyOperator();
+        this.divideOperator = new DivideOperator();
         this.results = new LinkedList<Double>();
     }
 
     public double calculate(double x, double y, char op) {
         double result = switch (op) {
-            case '+' -> x + y;
-            case '-' -> x - y;
-            case '*' -> x * y;
-            case '/' -> {
-                if (y != 0) {
-                    yield x / y;
-                } else {
-                    throw new ArithmeticException("Division by zero is undefined.");
-                }
-            }
+            case '+' -> addOperator.operate(x, y);
+            case '-' -> subtractOperator.operate(x, y);
+            case '*' -> multiplyOperator.operate(x, y);
+            case '/' -> divideOperator.operate(x, y);
             default -> {
                 throw new IllegalArgumentException("Unsupported operation: " + op);
             }
+
         };
         if (!results.offer(result)) {
             System.out.println("Enqueue operation failed.");
