@@ -3,11 +3,17 @@ package calculator;
 import java.lang.Math;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Calculator {
 
     static final double PI = Math.PI;
     protected Queue<Double> results;
+
+    public Calculator() {
+        this.results = new LinkedList<Double>();
+    }
 
     public Queue<Double> getResults() {
         return new LinkedList<>(results);
@@ -37,28 +43,33 @@ public class Calculator {
     }
 }
 
-class AddOperator {
+interface Operator {
+
+    double operate(double x, double y);
+}
+
+class AddOperator implements Operator {
 
     public double operate(double x, double y) {
         return x + y;
     }
 }
 
-class SubtractOperator {
+class SubtractOperator implements Operator {
 
     public double operate(double x, double y) {
         return x - y;
     }
 }
 
-class MultiplyOperator {
+class MultiplyOperator implements Operator {
 
     public double operate(double x, double y) {
         return x * y;
     }
 }
 
-class DivideOperator {
+class DivideOperator implements Operator {
 
     public double operate(double x, double y) {
         if (y == 0) {
@@ -68,33 +79,37 @@ class DivideOperator {
     }
 }
 
+class ModOperator implements Operator {
+
+    public double operate(double x, double y) {
+        if (y == 0) {
+            throw new ArithmeticException("Division by zero is undefined.");
+        }
+        return x % y;
+    }
+}
+
 
 class ArithmeticCalculator extends Calculator {
 
-    private AddOperator addOperator;
-    private SubtractOperator subtractOperator;
-    private MultiplyOperator multiplyOperator;
-    private DivideOperator divideOperator;
+    final private Map<Character, Operator> operators;
 
     public ArithmeticCalculator() {
-        this.addOperator = new AddOperator();
-        this.subtractOperator = new SubtractOperator();
-        this.multiplyOperator = new MultiplyOperator();
-        this.divideOperator = new DivideOperator();
-        this.results = new LinkedList<Double>();
+        super();
+        this.operators = new HashMap<>();
+        this.operators.put('+', new AddOperator());
+        this.operators.put('-', new SubtractOperator());
+        this.operators.put('*', new MultiplyOperator());
+        this.operators.put('/', new DivideOperator());
+        this.operators.put('%', new ModOperator());
     }
 
     public double calculate(double x, double y, char op) {
-        double result = switch (op) {
-            case '+' -> addOperator.operate(x, y);
-            case '-' -> subtractOperator.operate(x, y);
-            case '*' -> multiplyOperator.operate(x, y);
-            case '/' -> divideOperator.operate(x, y);
-            default -> {
-                throw new IllegalArgumentException("Unsupported operation: " + op);
-            }
-
-        };
+        Operator operator = operators.get(op);
+        if (operator == null) {
+            throw new IllegalArgumentException("Unsupported operation: " + op);
+        }
+        double result = operator.operate(x, y);
         if (!results.offer(result)) {
             System.out.println("Enqueue operation failed.");
         }
@@ -105,7 +120,7 @@ class ArithmeticCalculator extends Calculator {
 class CircleCalculator extends Calculator {
 
     public CircleCalculator() {
-        this.results = new LinkedList<Double>();
+        super();
     }
 
     public double calculateCircleArea(double radius) {

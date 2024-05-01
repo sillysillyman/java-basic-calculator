@@ -39,7 +39,7 @@ public class App {
                         }
                     }
 
-                    System.out.print("Enter the operator (+, -, *, /): ");
+                    System.out.print("Enter the operator (+, -, *, /, %): ");
                     char op = sc.nextLine().charAt(0);
                     double result = arithmeticCalc.calculate(x, y, op);
                     System.out.println("result: " + result);
