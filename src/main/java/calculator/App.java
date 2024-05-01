@@ -6,7 +6,8 @@ public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Calculator calc = new Calculator();
+        ArithmeticCalculator arithmeticCalc = new ArithmeticCalculator();
+        CircleCalculator circleCalc = new CircleCalculator();
 
         while (true) {
             System.out.println("\nChoose an option:");
@@ -40,35 +41,26 @@ public class App {
 
                     System.out.print("Enter the operator (+, -, *, /): ");
                     char op = sc.nextLine().charAt(0);
-                    double result = calc.calculate(x, y, op);
+                    double result = arithmeticCalc.calculate(x, y, op);
                     System.out.println("result: " + result);
                     System.out.println(
                         "Do you want to remove the oldest result? (Press ENTER to continue, type 'remove' to delete it)");
                     String removeMsg = sc.nextLine();
                     if (removeMsg.strip().equalsIgnoreCase("remove")) {
-                        calc.removeResult();
+                        arithmeticCalc.removeResult();
                     }
                     System.out.println(
                         "Do you want to inquiry the saved results? (Press ENTER to continue, type 'inquiry' to check them)");
                     String inquiryMsg = sc.nextLine();
                     if (inquiryMsg.strip().equalsIgnoreCase("inquiry")) {
-                        calc.inquiryResults();
+                        arithmeticCalc.inquiryResults();
                     }
                 }
                 case 2 -> {
                     System.out.print("Enter the radius: ");
                     double radius = Double.parseDouble(sc.nextLine());
-                    double area = calc.calculateCircleArea(radius);
-                    if (calc.getAreas().isEmpty()) {
-                        System.out.println("Results queue is empty.");
-                    } else {
-                        System.out.print("results: [ ");
-                        calc.getAreas().forEach(
-                            element -> {
-                                System.out.printf("%.2f ", element);
-                            });
-                        System.out.println("]");
-                    }
+                    double area = circleCalc.calculateCircleArea(radius);
+                    circleCalc.inquiryResults();
                 }
                 default -> {
                     throw new IllegalArgumentException("Unsupported option: " + choice);
