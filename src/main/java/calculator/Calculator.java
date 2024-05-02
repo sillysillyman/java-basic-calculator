@@ -33,12 +33,7 @@ public class Calculator {
         if (results.isEmpty()) {
             System.out.println("Results queue is empty.");
         } else {
-            System.out.print("results: [ ");
-            results.forEach(
-                element -> {
-                    System.out.printf("%.2f ", element);
-                });
-            System.out.println("]");
+            System.out.println(results.toString());
         }
     }
 }
@@ -109,7 +104,7 @@ class ArithmeticCalculator extends Calculator {
         if (operator == null) {
             throw new IllegalArgumentException("Unsupported operation: " + op);
         }
-        double result = operator.operate(x, y);
+        double result = Math.round(operator.operate(x, y) * 100) / 100.0;
         if (!results.offer(result)) {
             System.out.println("Enqueue operation failed.");
         }
@@ -124,7 +119,7 @@ class CircleCalculator extends Calculator {
     }
 
     public double calculateCircleArea(double radius) {
-        double area = PI * radius * radius;
+        double area = Math.round(PI * radius * radius * 100) / 100.0;
         if (!results.offer(area)) {
             System.out.println("Enqueue operation failed.");
         }
