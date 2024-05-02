@@ -45,14 +45,12 @@ public class App {
                     System.out.println("result: " + result);
                     System.out.println(
                         "Do you want to remove the oldest result? (Press ENTER to continue, type 'remove' to delete it)");
-                    String removeMsg = sc.nextLine();
-                    if (removeMsg.strip().equalsIgnoreCase("remove")) {
+                    if (sc.nextLine().strip().equalsIgnoreCase("remove")) {
                         arithmeticCalc.removeResult();
                     }
                     System.out.println(
                         "Do you want to inquiry the saved results? (Press ENTER to continue, type 'inquiry' to check them)");
-                    String inquiryMsg = sc.nextLine();
-                    if (inquiryMsg.strip().equalsIgnoreCase("inquiry")) {
+                    if (sc.nextLine().strip().equalsIgnoreCase("inquiry")) {
                         arithmeticCalc.inquiryResults();
                     }
                 }
@@ -68,8 +66,7 @@ public class App {
             }
             System.out.println(
                 "Do you want to calculate more? (Press ENTER to continue, type 'exit' to end)");
-            String exitMsg = sc.nextLine();
-            if (exitMsg.strip().equalsIgnoreCase("exit")) {
+            if (sc.nextLine().strip().equalsIgnoreCase("exit")) {
                 break;
             }
         }
