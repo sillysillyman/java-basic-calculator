@@ -9,7 +9,7 @@ public class App {
         ArithmeticCalculator arithmeticCalc = new ArithmeticCalculator();
         CircleCalculator circleCalc = new CircleCalculator();
 
-        while (true) {
+        do {
             System.out.println("\nChoose an option:");
             System.out.println("1. Arithmetic Operation");
             System.out.println("2. Calculate Circle Area");
@@ -66,10 +66,7 @@ public class App {
             }
             System.out.println(
                 "Do you want to calculate more? (Press ENTER to continue, type 'exit' to end)");
-            if (sc.nextLine().strip().equalsIgnoreCase("exit")) {
-                break;
-            }
-        }
+        } while (!sc.nextLine().strip().equalsIgnoreCase("exit"));
         sc.close();
     }
 }
