@@ -102,7 +102,7 @@ class ArithmeticCalculator extends Calculator {
     public double calculate(double x, double y, char op) {
         Operator operator = operators.get(op);
         if (operator == null) {
-            throw new IllegalArgumentException("Unsupported operation: " + op);
+            throw new UnsupportedOperationException("Unsupported operation: " + op);
         }
         double result = Math.round(operator.operate(x, y) * 100) / 100.0;
         if (!results.offer(result)) {
