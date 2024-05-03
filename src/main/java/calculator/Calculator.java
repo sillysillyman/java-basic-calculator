@@ -24,9 +24,3 @@ public abstract class Calculator {
 
     abstract void inquiryResults();
 }
-
-interface Operator {
-
-    double operate(double x, double y);
-}
-
