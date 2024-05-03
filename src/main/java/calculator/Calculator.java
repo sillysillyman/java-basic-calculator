@@ -3,8 +3,6 @@ package calculator;
 import java.lang.Math;
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.HashMap;
 
 public class Calculator {
 
@@ -81,48 +79,5 @@ class ModOperator implements Operator {
             throw new ArithmeticException("Division by zero is undefined.");
         }
         return x % y;
-    }
-}
-
-
-class ArithmeticCalculator extends Calculator {
-
-    final private Map<Character, Operator> operators;
-
-    public ArithmeticCalculator() {
-        super();
-        this.operators = new HashMap<>();
-        this.operators.put('+', new AddOperator());
-        this.operators.put('-', new SubtractOperator());
-        this.operators.put('*', new MultiplyOperator());
-        this.operators.put('/', new DivideOperator());
-        this.operators.put('%', new ModOperator());
-    }
-
-    public double calculate(double x, double y, char op) {
-        Operator operator = operators.get(op);
-        if (operator == null) {
-            throw new UnsupportedOperationException("Unsupported operation: " + op);
-        }
-        double result = Math.round(operator.operate(x, y) * 100) / 100.0;
-        if (!results.offer(result)) {
-            System.out.println("Enqueue operation failed.");
-        }
-        return result;
-    }
-}
-
-class CircleCalculator extends Calculator {
-
-    public CircleCalculator() {
-        super();
-    }
-
-    public double calculateCircleArea(double radius) {
-        double area = Math.round(PI * radius * radius * 100) / 100.0;
-        if (!results.offer(area)) {
-            System.out.println("Enqueue operation failed.");
-        }
-        return area;
     }
 }
