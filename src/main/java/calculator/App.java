@@ -17,7 +17,7 @@ public class App {
 
             switch (choice) {
                 case 1 -> {
-                    double x = 0;
+                    double x;
                     while (true) {
                         try {
                             System.out.print("Enter the first number: ");
@@ -28,7 +28,7 @@ public class App {
                         }
                     }
 
-                    double y = 0;
+                    double y;
                     while (true) {
                         try {
                             System.out.print("Enter the second number: ");
@@ -58,11 +58,10 @@ public class App {
                     System.out.print("Enter the radius: ");
                     double radius = Double.parseDouble(sc.nextLine());
                     double area = circleCalc.calculateCircleArea(radius);
+                    System.out.println("area: " + area);
                     circleCalc.inquiryResults();
                 }
-                default -> {
-                    throw new IllegalArgumentException("Unsupported option: " + choice);
-                }
+                default -> throw new IllegalArgumentException("Unsupported option: " + choice);
             }
             System.out.println(
                 "Do you want to calculate more? (Press ENTER to continue, type 'exit' to end)");

@@ -12,7 +12,7 @@ public class Calculator {
     protected Queue<Double> results;
 
     public Calculator() {
-        this.results = new LinkedList<Double>();
+        this.results = new LinkedList<>();
     }
 
     public Queue<Double> getResults() {
