@@ -45,14 +45,20 @@ public class App {
                     double result = arithmeticCalc.calculate(x, y, op);
                     System.out.println("result: " + result);
                     System.out.println(
-                        "Do you want to remove the oldest result? (Press ENTER to continue, type 'remove' to delete it)");
-                    if (sc.nextLine().strip().equalsIgnoreCase("remove")) {
+                        "Do you want to remove the oldest result? (Press ENTER to continue, type 'yes' to remove it)");
+                    if (sc.nextLine().strip().equalsIgnoreCase("yes")) {
                         arithmeticCalc.removeResult();
                     }
                     System.out.println(
-                        "Do you want to inquiry the saved results? (Press ENTER to continue, type 'inquiry' to check them)");
-                    if (sc.nextLine().strip().equalsIgnoreCase("inquiry")) {
+                        "Do you want to inquiry the saved results? (Press ENTER to continue, type 'yes' to inquiry them)");
+                    if (sc.nextLine().strip().equalsIgnoreCase("yes")) {
                         arithmeticCalc.inquiryResults();
+                    }
+                    System.out.println(
+                        "Do you want to inquiry the saved results, which are greater than a value? (Press ENTER to continue, type 'yes' to inquiry them)");
+                    if (sc.nextLine().strip().equalsIgnoreCase("yes")) {
+                        System.out.print("Enter the value: ");
+                        arithmeticCalc.inquiryGreaterThan(Double.parseDouble(sc.nextLine()));
                     }
                 }
                 case 2 -> {
