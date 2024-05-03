@@ -33,7 +33,7 @@ public class Calculator {
         if (results.isEmpty()) {
             System.out.println("Results queue is empty.");
         } else {
-            System.out.println(results.toString());
+            System.out.println(results);
         }
     }
 }
