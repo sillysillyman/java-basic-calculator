@@ -1,6 +1,8 @@
 package calculator;
 
+import java.util.LinkedList;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class ArithmeticCalculator extends Calculator {
 
@@ -25,6 +27,17 @@ public class ArithmeticCalculator extends Calculator {
             case DIVISION -> new DivideOperator();
             case MODULO -> new ModOperator();
         };
+    }
+
+    public void inquiryGreaterThan(double x) {
+        Queue<Double> filteredResults = super.getResults().stream()
+            .filter(value -> value > x)
+            .collect(Collectors.toCollection(LinkedList::new));
+        if (filteredResults.isEmpty()) {
+            System.out.println("Empty queue: there is no result.");
+        } else {
+            System.out.println(filteredResults);
+        }
     }
 
     @Override
