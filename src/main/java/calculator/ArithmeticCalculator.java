@@ -1,33 +1,30 @@
 package calculator;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Queue;
 
 public class ArithmeticCalculator extends Calculator {
 
-    final private Map<Character, Operator> operators;
-
     public ArithmeticCalculator(Queue<Double> results) {
         super(results);
-        this.operators = new HashMap<>();
-        this.operators.put('+', new AddOperator());
-        this.operators.put('-', new SubtractOperator());
-        this.operators.put('*', new MultiplyOperator());
-        this.operators.put('/', new DivideOperator());
-        this.operators.put('%', new ModOperator());
     }
 
     public double calculate(double x, double y, char op) {
-        Operator operator = operators.get(op);
-        if (operator == null) {
-            throw new UnsupportedOperationException("Unsupported operation: " + op);
-        }
-        double result = Math.round(operator.operate(x, y) * 100) / 100.0;
+        double result = Math.round(selectOperator(op).operate(x, y) * 100) / 100.0;
         if (!super.getResults().offer(result)) {
             System.out.println("Enqueue operation failed.");
         }
         return result;
+    }
+
+    private Operator selectOperator(char op) {
+        OperatorType opType = OperatorType.charToOperator(op);
+        return switch (opType) {
+            case ADDITION -> new AddOperator();
+            case SUBTRACTION -> new SubtractOperator();
+            case MULTIPLICATION -> new MultiplyOperator();
+            case DIVISION -> new DivideOperator();
+            case MODULO -> new ModOperator();
+        };
     }
 
     @Override
