@@ -1,13 +1,14 @@
 package calculator;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArithmeticCalculator arithmeticCalc = new ArithmeticCalculator();
-        CircleCalculator circleCalc = new CircleCalculator();
+        ArithmeticCalculator arithmeticCalc = new ArithmeticCalculator(new LinkedList<>());
+        CircleCalculator circleCalc = new CircleCalculator(new LinkedList<>());
 
         do {
             System.out.println("\nChoose an option:");
@@ -57,7 +58,7 @@ public class App {
                 case 2 -> {
                     System.out.print("Enter the radius: ");
                     double radius = Double.parseDouble(sc.nextLine());
-                    double area = circleCalc.calculateCircleArea(radius);
+                    double area = circleCalc.calculate(radius);
                     System.out.println("area: " + area);
                     circleCalc.inquiryResults();
                 }

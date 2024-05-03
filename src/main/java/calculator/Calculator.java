@@ -2,38 +2,27 @@ package calculator;
 
 import java.lang.Math;
 import java.util.Queue;
-import java.util.LinkedList;
 
-public class Calculator {
+public abstract class Calculator {
 
-    static final double PI = Math.PI;
+    public static final double PI = Math.PI;
     protected Queue<Double> results;
 
-    public Calculator() {
-        this.results = new LinkedList<>();
+    public Calculator(Queue<Double> results) {
+        this.results = results;
     }
 
     public Queue<Double> getResults() {
-        return new LinkedList<>(results);
-    }
-
-    public void setResults(Queue<Double> results) {
-        this.results = results;
+        return results;
     }
 
     public void removeResult() {
         if (results.poll() == null) {
-            System.out.println("Results queue is empty.");
+            System.out.println("Empty queue: cannot remove anything.");
         }
     }
 
-    public void inquiryResults() {
-        if (results.isEmpty()) {
-            System.out.println("Results queue is empty.");
-        } else {
-            System.out.println(results);
-        }
-    }
+    abstract void inquiryResults();
 }
 
 interface Operator {
